@@ -452,7 +452,7 @@ class SsdTPTest(DeviceTest):
     A class to carry out the Throughput test.
     '''
     ##Labels of block sizes for throughput test
-    bsLabels = ["1024k","64k","8k","4k","512",]
+    bsLabels = ["2048k", "1024k","64k","8k","4k","512",]
     
     def __init__(self,testname,device,options):
         '''
@@ -894,7 +894,7 @@ class HddTPTest(DeviceTest):
     ## Number of rounds to carry out the tests
     maxRnds = 128
     ##Labels of block sizes for throughput test
-    bsLabels = ["1024k","4k"]
+    bsLabels = ["2048k","1024k","4k"]
     
     def __init__(self,testname,device,options=None):
         '''
