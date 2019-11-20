@@ -13,7 +13,7 @@ class Options(object):
     A class holding user defined options on command line.
     '''
 
-    def __init__(self, nj=1, iod=1, runtime=60, xargs=None):
+    def __init__(self, nj=1, iod=1, runtime=60, ioengine="libaio", xargs=None):
         '''
         Constructor
         @param nj Number of jobs
@@ -26,16 +26,20 @@ class Options(object):
         self.__iod = iod
         ## Runtime of one test round for fio.
         self.__runtime = runtime
+        ## IOEngine of one test round for fio.
+        self.__ioengine = ioengine
         ## Further single arguments as list for fio.
         self.__xargs = xargs
 
     def getNj(self): return self.__nj
     def getIod(self): return self.__iod
     def getRuntime(self): return self.__runtime
+    def getIOEngine(self): return self.__ioengine
     def getXargs(self): return self.__xargs
     def setNj(self,nj): self.__nj = nj
     def setIod(self,iod): self.__iod = iod
     def setRuntime(self,rt): self.__runtime = rt
+    def setIOEngine(self,ioe): self.__ioengine = ioe
     def setXargs(self,xargs): self.__xargs = xargs
     
     def appendXml(self,r):
@@ -53,6 +57,10 @@ class Options(object):
         
         data = json.dumps(self.__runtime)
         e = etree.SubElement(r,'runtime')
+        e.text = data
+
+        data = json.dumps(self.__ioengine)
+        e = etree.SubElement(r,'ioengine')
         e.text = data
         
         if self.__xargs != None:
@@ -72,6 +80,8 @@ class Options(object):
             self.__iod = json.loads(root.findtext('iodepth'))
         if root.findtext('runtime'):
             self.__runtime = json.loads(root.findtext('runtime'))
+        if root.findtext('ioengine'):
+            self.__ioengine = json.loads(root.findtext('ioengine'))
         if root.findtext('xargs'):
                 self.__xargs = json.loads(root.findtext('xargs'))
         logging.info("# Loading options from xml")

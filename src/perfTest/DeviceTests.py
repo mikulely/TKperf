@@ -81,12 +81,12 @@ class DeviceTest(object):
         self.__fioJob.addKVArg("name",self.__testname)
         self.__fioJob.addKVArg("direct","1")
         self.__fioJob.addSglArg("minimal")
-        self.__fioJob.addKVArg("ioengine","libaio")
         self.__fioJob.addSglArg("time_based")
         if self.__options == None:
             self.__fioJob.addKVArg("numjobs",str(1))
             self.__fioJob.addKVArg("iodepth",str(1))
             self.__fioJob.addKVArg("runtime",str(60))
+            self.__fioJob.addKVArg("ioengine","libaio")
         else:
             if self.getOptions().getNj() != None:
                 self.__fioJob.addKVArg("numjobs",str(self.getOptions().getNj()))
@@ -94,6 +94,8 @@ class DeviceTest(object):
                 self.__fioJob.addKVArg("iodepth",str(self.getOptions().getIod()))
             if self.getOptions().getRuntime() != None:
                 self.__fioJob.addKVArg("runtime",str(self.getOptions().getRuntime()))
+            if self.getOptions().getIOEngine() != None:
+                self.__fioJob.addKVArg("ioengine",str(self.getOptions().getIOEngine()))
             if self.getOptions().getXargs() != None:
                 for arg in self.getOptions().getXargs():
                     self.__fioJob.addSglArg(arg)

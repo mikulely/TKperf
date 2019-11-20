@@ -174,7 +174,7 @@
 
 ### tkperf
 ```
-usage: tkperf [-h] [-v] [-d] [-q] [-nj NUMJOBS] [-iod IODEPTH] [-rt RUNTIME]
+usage: tkperf [-h] [-v] [-d] [-q] [-nj NUMJOBS] [-iod IODEPTH] [-rt RUNTIME] [-ioe IOENGINE]
               [-i {sas,nvme,fusion}] [-xml] [-rfb] [-dsc DESC_FILE]
               [-c CONFIG] [-ft] [-fm FEATURE_MATRIX] [-hddt {iops,tp}]
               [-ssdt {iops,lat,tp,writesat}] [-m MAIL] [-s SMTP]
@@ -199,6 +199,9 @@ optional arguments:
   -rt RUNTIME, --runtime RUNTIME
                         specify the fio runtime of one test round, if not set
                         this is 60 seconds
+  -ioe IOENGINE, --ioengine IOENGINE
+                        specify the fio ioengine of one test round, if not set
+                        this is libaio
   -i {sas,nvme,fusion}, --interface {sas,nvme,fusion}
                         specify optional device interface
   -xml, --fromxml       don't run tests but load test objects from xml file
